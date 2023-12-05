@@ -213,9 +213,11 @@ def dbsetup(conn):
     permitssetup(conn)
     permitsfill(conn)
 
-def customerread(conn):
+def customerRead(conn):
     cur = conn.cursor()
     cur.execute("SELECT * FROM customers")
     dat = cur.fetchall()
     cur.close()
     return(dat)
+
+#dbsetup(cn) #initialise the databse
