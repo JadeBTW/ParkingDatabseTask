@@ -213,11 +213,45 @@ def dbsetup(conn):
     permitssetup(conn)
     permitsfill(conn)
 
+def tupleRectifier(tupleTable):
+    table = []
+    for tuple in tupleTable:
+        item = []
+        for i in tuple:
+            item.append(i)
+        table.append(item)
+    return(table)
+
+def singleTupleFix(tuple):
+    item = []
+    for i in tuple:
+        item.append(i)
+    return(item)
+
 def getAll(conn,table):
     cur = conn.cursor()
     cur.execute(f'SELECT * FROM {table}')
     dat = cur.fetchall()
     cur.close()
-    return(dat)
+    return(tupleRectifier(dat))
+
+def getLines(conn,table,lines):
+    cur = conn.cursor()
+    cur.execute(f'SELECT * FROM {table}')
+    dat = cur.fetchmany(lines)
+    cur.close()
+    return(tupleRectifier(dat))
+
+def getOne(conn,table):
+    cur = conn.cursor()
+    cur.execute(f'SELECT * FROM {table}')
+    dat = cur.fetchone()
+    cur.close()
+    return(singleTupleFix(dat))
 
 #dbsetup(cn) #initialise the databse
+
+e = getLines(cn,"permits",3)
+print(e)
+e = getOne(cn,"cars")
+print(e)
