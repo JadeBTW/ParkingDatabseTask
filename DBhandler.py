@@ -200,17 +200,17 @@ def permitsfill(conn): #populate permit sheet with deafults if empty
     cur.close()
 
 def dbsetup(conn):
-    spacesetup(cn)
-    spacefill(cn)
-    carsetup(cn)
-    carfill(cn)
-    termpricesetup(cn)
-    termpricefill(cn)
-    customersetup(cn)
-    customersfill(cn)
-    ownersetup(cn)
-    ownerfill(cn)
-    permitssetup(cn)
-    permitsfill(cn)
+    spacesetup(conn)
+    spacefill(conn)
+    carsetup(conn)
+    carfill(conn)
+    termpricesetup(conn)
+    termpricefill(conn)
+    customersetup(conn)
+    customersfill(conn)
+    ownersetup(conn)
+    ownerfill(conn)
+    permitssetup(conn)
+    permitsfill(conn)
 
-dbsetup(cn) #initialise the databse
+#dbsetup(cn) #initialise the databse
