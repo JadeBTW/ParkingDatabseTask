@@ -2,7 +2,7 @@ import sqlite3 as db
 import PySimpleGUI as gui
 import datetime as t
 
-cn = db.connect("Database work/parking.db")
+cn = db.connect("parking.db")
 cr = cn.cursor()
 cr.executescript("PRAGMA foreign_keys = ON") #enabling table linking
 cn.commit()
@@ -56,7 +56,7 @@ def spacefill(conn): #if spaces table is empty, build data from spaces.txt
     cur.execute("""SELECT * from spaces;""")
     dat = cur.fetchall()
     if dat == []:
-        file = open("Database work/spaces.txt").readlines()
+        file = open("spaces.txt").readlines()
         print("[INFO] empty Table, creating data")
         for i in file:
             tmp = i.strip("\n")
