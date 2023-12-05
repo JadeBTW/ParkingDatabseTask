@@ -8,6 +8,8 @@ from datetime import *
 import sqlite3 as db
 import DBhandler as dbh
 
+os.system("cls||clear") # Automatically clears the terminal
+
 cn = db.connect("parking.db")
 cr = cn.cursor()
 cr.executescript("PRAGMA foreign_keys = ON") #enabling table linking
@@ -15,8 +17,7 @@ cn.commit()
 cr.close()
 
 dbh.dbsetup(cn)
-
-os.system("cls||clear") # Automatically clears the terminal
+print(dbh.customerRead(cn))
 
 spaces = []
 disabled = ["No", "Yes"]
