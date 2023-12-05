@@ -213,9 +213,9 @@ def dbsetup(conn):
     permitssetup(conn)
     permitsfill(conn)
 
-def customerRead(conn):
+def getAll(conn,table):
     cur = conn.cursor()
-    cur.execute("SELECT * FROM customers")
+    cur.execute(f'SELECT * FROM {table}')
     dat = cur.fetchall()
     cur.close()
     return(dat)
