@@ -189,8 +189,8 @@ def settings():
         if event == sg.WIN_CLOSED or event == "Exit":
             break
         if event == "Save and Exit":
-            global colourBackground
-            colourBackground = values["inputColourBackground"]
+            bgColour = values["inputColourBackground"]
+            return(bgColour)
             break
 
         current_time = datetime.now().strftime("%H:%M:%S")
@@ -222,7 +222,8 @@ def main():
         if event == "viewData":
             viewData()
         if event == "settings":
-            settings()
+            #settings()
+            pass
         if event == "debugMenu":
             passwordPrompt()
 
