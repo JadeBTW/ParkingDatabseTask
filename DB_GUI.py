@@ -23,7 +23,7 @@ spaces = []
 disabled = ["No", "Yes"]
 studentOrStaff = ["Student", "Staff"]
 
-passwordFile = open("password.txt", "r") # Get password
+passwordFile = open("ParkingDatabseTask/password.txt", "r") # Get password
 password = passwordFile.readline()
 
 # Grab spaces from text file and append to list spaces
@@ -89,7 +89,6 @@ def viewData():
 
 
     toprow = ['Cust. ID', 'Surname', 'Forename', 'Disabled?', "Type"]
-
     rows = dbh.getAll(cn, "customers")
 
     tbl1 = sg.Table(values=rows, headings=toprow, auto_size_columns=True, display_row_numbers=False, justification='center', key='-TABLE-', selected_row_colors='red on yellow', enable_events=True, expand_x=True, expand_y=True, enable_click_events=True)
@@ -98,7 +97,7 @@ def viewData():
         [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#EEE5DE", text_color="black")],
         [sg.Text(("View Data"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color="#EEE5DE")],
         [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color="#EEE5DE")],
-        [sg.Table]
+        [tbl1]
     ]
 
     window = sg.Window("View Data", layout, background_color="#EEE5DE", size=(500, 500), resizable=False)
