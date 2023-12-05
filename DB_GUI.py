@@ -23,7 +23,7 @@ spaces = []
 disabled = ["No", "Yes"]
 studentOrStaff = ["Student", "Staff"]
 
-passwordFile = open("ParkingDatabseTask/password.txt", "r") # Get password
+passwordFile = open("password.txt", "r") # Get password
 password = passwordFile.readline()
 
 # Grab spaces from text file and append to list spaces
@@ -85,9 +85,6 @@ def inputFormCustomer():
 
 
 def viewData():
-
-
-
     toprow = ['Cust. ID', 'Surname', 'Forename', 'Disabled?', "Type"]
     rows = dbh.getAll(cn, "customers")
 
