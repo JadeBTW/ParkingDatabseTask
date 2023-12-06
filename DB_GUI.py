@@ -1,5 +1,8 @@
-#Wilson Warrington | 2023
-#Parking Database GUI
+#Wilson Warrington & Jade Hemmings | 2023
+#Parking Database GUI (utilising custom sql backend library)
+
+global colourBackground
+colourBackground = "#EEE5DE"
 
 # Import all required libraries
 import PySimpleGUI as sg
@@ -33,21 +36,22 @@ for line in open("spaces.txt", "r"):
 
 # Define layout
 def inputFormCustomer():
+    global colourBackground
     layout = [
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text(("Parking Database Input Form"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color="#EEE5DE")],
-        [sg.Text(("Please populate all fields and click submit and exit when done."), size=(200, 1), justification="c", background_color="#EEE5DE", text_color="black")],
-        [sg.Text("Forename", size =(20, 1), text_color="black", background_color="#EEE5DE"), sg.InputText((), size=(20, 1), key="inputForename", enable_events=True)],
-        [sg.Text("Surname", size =(20, 1), text_color="black", background_color="#EEE5DE"), sg.InputText((), size=(20, 1), key="inputSurname", enable_events=True)],
-        [sg.Text("Student or Staff", size =(20, 1), text_color="black", background_color="#EEE5DE"), sg.Combo((["Student", "Staff"]), size=(20, 1), key="type", enable_events=True)],
-        [sg.Text("Disabled?", size=(20, 1), text_color="black", background_color="#EEE5DE"), sg.Combo((["No", "Yes"]), enable_events=True, key="disabled?", size=(20, 1), readonly=True)],
-        [sg.Col([[sg.Button("Submit and Exit", button_color="black", disabled=True)]], justification="center", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color="#EEE5DE")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text(("Parking Database Input Form"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color=colourBackground)],
+        [sg.Text(("Please populate all fields and click submit and exit when done."), size=(200, 1), justification="c", background_color=colourBackground, text_color="black")],
+        [sg.Text("Forename", size =(20, 1), text_color="black", background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputForename", enable_events=True)],
+        [sg.Text("Surname", size =(20, 1), text_color="black", background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputSurname", enable_events=True)],
+        [sg.Text("Student or Staff", size =(20, 1), text_color="black", background_color=colourBackground), sg.Combo((["Student", "Staff"]), size=(20, 1), key="type", enable_events=True)],
+        [sg.Text("Disabled?", size=(20, 1), text_color="black", background_color=colourBackground), sg.Combo((["No", "Yes"]), enable_events=True, key="disabled?", size=(20, 1), readonly=True)],
+        [sg.Col([[sg.Button("Submit and Exit", button_color="black", disabled=True)]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color=colourBackground)],
     ]
 
     # Create the window
-    window = sg.Window("Parking Database Form", layout, background_color="#EEE5DE", size=(500, 500), resizable=False)
+    window = sg.Window("Parking Database Form", layout, background_color=colourBackground, size=(500, 500), resizable=False)
 
     # Main loop
     while True:
@@ -85,7 +89,7 @@ def inputFormCustomer():
 
 
 def viewData():
-
+    global colourBackground
 
 
     toprow = ['Cust. ID', 'Surname', 'Forename', 'Disabled?', "Type"]
@@ -93,14 +97,14 @@ def viewData():
 
     tbl1 = sg.Table(values=rows, headings=toprow, auto_size_columns=True, display_row_numbers=False, justification='center', key='-TABLE-', selected_row_colors='red on yellow', enable_events=True, expand_x=True, expand_y=True, enable_click_events=True)
     layout = [
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text(("View Data"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color="#EEE5DE")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text(("View Data"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color=colourBackground)],
         [tbl1]
     ]
 
-    window = sg.Window("View Data", layout, background_color="#EEE5DE", size=(500, 500), resizable=False)
+    window = sg.Window("View Data", layout, background_color=colourBackground, size=(500, 500), resizable=False)
 
     while True:
         event, values = window.read(timeout=1000)
@@ -116,6 +120,7 @@ def viewData():
 
 
 def debugMenu():
+    global colourBackground
     layout = [
         [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color="#00FF7F", text_color="black")],
         [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#00FF7F", text_color="black")],
@@ -147,16 +152,17 @@ def debugMenu():
 
 
 def passwordPrompt():
+    global colourBackground
     layout = [
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text(("Please Enter Administrator Password"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color="#EEE5DE")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text(("Please Enter Administrator Password"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color=colourBackground)],
         [sg.InputText((), size=(20, 1), key="inputPassword", pad=(175, 0), password_char="*")],
-        [sg.Col([[sg.Button("Submit", button_color="black", key="submitPassword")]], justification="center", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Cancel", button_color="black")]], justification="center", background_color="#EEE5DE")],
+        [sg.Col([[sg.Button("Submit", button_color="black", key="submitPassword")]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Cancel", button_color="black")]], justification="center", background_color=colourBackground)],
     ]
 
-    window = sg.Window("Enter Password", layout, size=(500, 500), background_color="#EEE5DE", resizable=False)
+    window = sg.Window("Enter Password", layout, size=(500, 500), background_color=colourBackground, resizable=False)
     while True:
         event, values = window.read(timeout=1000)
         if event == sg.WIN_CLOSED or event == "Cancel":
@@ -177,23 +183,26 @@ def passwordPrompt():
     window.close()
 
 def settings():
+    global colourBackground
     layout = [
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text(("Database Settings"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color="#EEE5DE")],
-        [sg.Text("Background Colour", size =(20, 1), text_color="black", background_color="#EEE5DE"), sg.InputText((), size=(20, 1), key="inputColourBackground", enable_events=True)],
-        [sg.Col([[sg.Button("Save and Exit", button_color="black")]], justification="center", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color="#EEE5DE")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text(("Database Settings"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color=colourBackground)],
+        [sg.Text("Background Colour", size =(20, 1), text_color="black", background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputColourBackground", enable_events=True)],
+        [sg.Col([[sg.Button("Save and Exit", button_color="black")]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Exit", button_color="black")]], justification="center", background_color=colourBackground)],
     ]
 
-    window = sg.Window("Settings", layout, size=(500, 500), background_color="#EEE5DE", resizable=False)
+    window = sg.Window("Settings", layout, size=(500, 500), background_color=colourBackground, resizable=False)
     while True:
         event, values = window.read(timeout=1000)
         if event == sg.WIN_CLOSED or event == "Exit":
             break
         if event == "Save and Exit":
-            global colourBackground
+            colourBackground
+            print(values["inputColourBackground"])
             colourBackground = values["inputColourBackground"]
+            print(colourBackground)
             break
 
         current_time = datetime.now().strftime("%H:%M:%S")
@@ -205,16 +214,17 @@ def settings():
 
 
 def main():
+    global colourBackground
     layout = [
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color="#EEE5DE", text_color="black")],
-        [sg.Text(("Parking Database Main Menu"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Add Customer", pad=(20, 10), button_color="black", key="addCustomer", size=(15, 3), font=("Arial", 10)), sg.Button("View Data", pad=(20, 10), button_color="black", key="viewData", size=(15, 3), font=("Arial", 10))]], justification="center", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Settings", pad=(20, 10), button_color="black", key="settings", size=(15, 3), font=("Arial", 10)), sg.Button("Debug Menu", pad=(20, 10), button_color="black", key="debugMenu", size=(15, 3), font=("Arial", 10))]], justification="center", background_color="#EEE5DE")],
-        [sg.Col([[sg.Button("Exit", pad=(20, 10), button_color="black", key="exit", size=(15, 3), font=("Arial", 10))]], justification="center", background_color="#EEE5DE")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="date_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text("", size=(20, 1), font=("Arial", 10), key="time_display", justification="left", background_color=colourBackground, text_color="black")],
+        [sg.Text(("Parking Database Main Menu"), size=(200, 1), font=("Arial", 20), justification="c", text_color="black", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Add Customer", pad=(20, 10), button_color="black", key="addCustomer", size=(15, 3), font=("Arial", 10)), sg.Button("View Data", pad=(20, 10), button_color="black", key="viewData", size=(15, 3), font=("Arial", 10))]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Settings", pad=(20, 10), button_color="black", key="settings", size=(15, 3), font=("Arial", 10)), sg.Button("Debug Menu", pad=(20, 10), button_color="black", key="debugMenu", size=(15, 3), font=("Arial", 10))]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Exit", pad=(20, 10), button_color="black", key="exit", size=(15, 3), font=("Arial", 10))]], justification="center", background_color=colourBackground)],
     ]
 
-    window = sg.Window("Main Menu", layout, size=(500, 500), background_color="#EEE5DE", resizable=False)
+    window = sg.Window("Main Menu", layout, size=(500, 500), background_color=colourBackground, resizable=False)
     while True:
         event, values = window.read(timeout=1000)
         if event == sg.WIN_CLOSED or event == "exit":
