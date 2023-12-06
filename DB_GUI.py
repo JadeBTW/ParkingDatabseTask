@@ -26,7 +26,7 @@ spaces = []
 disabled = ["No", "Yes"]
 studentOrStaff = ["Student", "Staff"]
 
-passwordFile = open("ParkingDatabseTask/password.txt", "r") # Get password
+passwordFile = open("password.txt", "r") # Get password
 password = passwordFile.readline()
 
 # Grab spaces from text file and append to list spaces
@@ -235,7 +235,8 @@ def main():
         if event == "viewData":
             viewData()
         if event == "settings":
-            settings()
+            #settings()
+            pass
         if event == "debugMenu":
             passwordPrompt()
 
