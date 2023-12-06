@@ -13,6 +13,9 @@ import DBhandler as dbh
 
 os.system("cls||clear") # Automatically clears the terminal
 
+directory = __file__.strip("DB_GUI.py")
+print(f'[INFO] Python execution enviroment directory variable detected as {directory}')
+
 cn = db.connect("parking.db")
 cr = cn.cursor()
 cr.executescript("PRAGMA foreign_keys = ON") #enabling table linking
@@ -20,17 +23,16 @@ cn.commit()
 cr.close()
 
 dbh.dbsetup(cn)
-print(dbh.getAll(cn, "customers"))
 
 spaces = []
 disabled = ["No", "Yes"]
 studentOrStaff = ["Student", "Staff"]
 
-passwordFile = open("password.txt", "r") # Get password
+passwordFile = open(f'{directory}password.txt', "r") # Get password
 password = passwordFile.readline()
 
 # Grab spaces from text file and append to list spaces
-for line in open("spaces.txt", "r"):
+for line in open(f'{directory}spaces.txt', "r"):
     line = line.strip()
     spaces.append(line)
 
