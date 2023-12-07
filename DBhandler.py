@@ -249,9 +249,19 @@ def getOne(conn,table):
     cur.close()
     return(singleTupleFix(dat))
 
+def getSpaces(conn,int):
+    cur = conn.cursor()
+    cur.execute(f'SELECT SpaceID FROM spaces WHERE Occupied == {int}')
+    dat = cur.fetchall()
+    cur.close()
+    return(tupleRectifier(dat))
+
+
 #dbsetup(cn) #initialise the databse
 
 e = getLines(cn,"permits",3)
 print(e)
 e = getOne(cn,"cars")
+print(e)
+e = getSpaces(cn,0)
 print(e)
