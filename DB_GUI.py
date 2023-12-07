@@ -19,6 +19,19 @@ os.system("cls||clear") # Automatically clears the terminal
 directory = __file__.strip("DB_GUI.py")
 print(f'[INFO] Python execution enviroment directory variable detected as {directory}')
 
+def sqlTerminal():
+    global cn
+    sg.Print("Sqlite v3 Direct Databse Terminal v0.1")
+    sg.Print("="*30)
+    sg.Print()
+    while 1 == 1:
+        dat = sg.PopupGetText(">>>")
+        if dat == "EXIT":
+            sg.Print("[INFO] Exiting Terminal Environment")
+            break
+        sg.Print(f'[INFO] Executing sqlite statement: {dat}')
+        sg.Print(f'[INFO] Sql handler returned data: {dbh.sqlInterface(cn, dat)}')
+
 class Settings():
     def __init__(self) -> None:
         global directory
@@ -177,6 +190,7 @@ def debugMenu():
         [sg.Text(("Debug Menu"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
         [sg.Col([[sg.Button("Debug Spaces", button_color=colourText)]], justification="center", background_color=colourBackground)],
         [sg.Col([[sg.Button("Debug Password", button_color=colourText)]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Direct Sql Terminal", button_color=colourText)]], justification="center", background_color=colourBackground)],
         [sg.Col([[sg.Button("Exit Debug Menu", button_color=colourText)]], justification="center", background_color=colourBackground)],
     ]
 
@@ -192,6 +206,8 @@ def debugMenu():
         if event == "Debug Password":
             print(">>> Password Debugging Started")
             sg.Print("Password is: " + password)
+        if event == "Direct Sql Terminal":
+            sqlTerminal()
 
         current_time = datetime.now().strftime("%H:%M:%S")
         current_date = date.today()

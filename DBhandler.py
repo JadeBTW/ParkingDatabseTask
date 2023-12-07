@@ -256,9 +256,24 @@ def getSpaces(conn,int):
     cur.close()
     return(tupleRectifier(dat))
 
-
+def sqlInterface(conn,cmd):
+    cur = conn.cursor()
+    try:
+        cur.execute(str(cmd))
+        conn.commit()
+    except:
+        return(f'Something Failed: {db.Error()}')
+    dat = cur.fetchall()
+    lent = len(dat)
+    print(lent)
+    if lent > 0:
+        cur.close()
+        if lent > 1:
+            return(tupleRectifier(dat))
+        else:
+            return(singleTupleFix(dat))
+    cur.close()
 #dbsetup(cn) #initialise the databse
-
 e = getLines(cn,"permits",3)
 print(e)
 e = getOne(cn,"cars")
