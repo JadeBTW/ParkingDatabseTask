@@ -1,4 +1,3 @@
-#Wilson Warrington & Jade Hemmings | 2023
 #Parking Database GUI (utilising custom sql backend library)
 
 colourBackground = "#6fa074"
