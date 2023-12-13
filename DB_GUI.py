@@ -88,7 +88,7 @@ for line in open(f'{directory}spaces.txt', "r"):
     spaces.append(line)
 
 # Define layout
-def inputFormCustomer():
+def inputData():
     global colourBackground
     global colourText
     global typeFont
@@ -96,7 +96,7 @@ def inputFormCustomer():
     layout = [
         [sg.Text("", size=(20, 1), font=(typeFont, 10), key="date_display", justification="left", background_color=colourBackground, text_color=colourText)],
         [sg.Text("", size=(20, 1), font=(typeFont, 10), key="time_display", justification="left", background_color=colourBackground, text_color=colourText)],
-        [sg.Text(("Parking Database Input Form"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
+        [sg.Text(("Data Input Form"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
         [sg.Text(("Please populate all fields and click submit and exit when done."), size=(200, 1), justification="c", background_color=colourBackground, text_color=colourText)],
         [sg.Text("Forename", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputForename", enable_events=True)],
         [sg.Text("Surname", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputSurname", enable_events=True)],
@@ -299,7 +299,7 @@ def main():
         [sg.Text("", size=(20, 1), font=(typeFont, 10), key="date_display", justification="left", background_color=colourBackground, text_color=colourText)],
         [sg.Text("", size=(20, 1), font=(typeFont, 10), key="time_display", justification="left", background_color=colourBackground, text_color=colourText)],
         [sg.Text(("Parking Database Main Menu"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
-        [sg.Col([[sg.Button("Add Customer", pad=(20, 10), button_color=colourText, key="addCustomer", size=(15, 3), font=(typeFont, 10)), sg.Button("View Data", pad=(20, 10), button_color=colourText, key="viewData", size=(15, 3), font=(typeFont, 10))]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Add Data", pad=(20, 10), button_color=colourText, key="addData", size=(15, 3), font=(typeFont, 10)), sg.Button("View Data", pad=(20, 10), button_color=colourText, key="viewData", size=(15, 3), font=(typeFont, 10))]], justification="center", background_color=colourBackground)],
         [sg.Col([[sg.Button("Settings", pad=(20, 10), button_color=colourText, key="settings", size=(15, 3), font=(typeFont, 10)), sg.Button("Debug Menu", pad=(20, 10), button_color=colourText, key="debugMenu", size=(15, 3), font=(typeFont, 10))]], justification="center", background_color=colourBackground)],
         [sg.Col([[sg.Button("Exit", pad=(20, 10), button_color=colourText, key="exit", size=(15, 3), font=(typeFont, 10))]], justification="center", background_color=colourBackground)],
     ]
@@ -308,10 +308,10 @@ def main():
     while True:
         event, values = window.read(timeout=1000)
         if event == sg.WIN_CLOSED or event == "exit":
-            print(">>> Database Closed")
+            print("[INFO] Database Closed")
             break
-        if event == "addCustomer":
-            inputFormCustomer()
+        if event == "addData":
+            inputData()
         if event == "viewData":
             viewData()
         if event == "settings":
