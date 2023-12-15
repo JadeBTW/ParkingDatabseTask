@@ -112,6 +112,8 @@ def inputDataMenu():
             break
         if event == "addCustomer":
             addCustomer()
+        if event == "addCar":
+            addCar()
 
         current_time = datetime.now().strftime("%H:%M:%S") # Get current time to display
         current_date = date.today()
@@ -176,7 +178,58 @@ def addCustomer():
 
 
 def addCar():
-    pass
+    global colourBackground
+    global colourText
+    global typeFont
+    global colourHighlight
+
+    layout = [
+        [sg.Text("", size=(20, 1), font=(typeFont, 10), key="date_display", justification="left", background_color=colourBackground, text_color=colourText)],
+        [sg.Text("", size=(20, 1), font=(typeFont, 10), key="time_display", justification="left", background_color=colourBackground, text_color=colourText)],
+        [sg.Text(("Add Car"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
+        [sg.Text(("Please populate all fields and click submit and exit when done."), size=(200, 1), justification="c", background_color=colourBackground, text_color=colourText)],
+        [sg.Text(" ", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key=" ", enable_events=True)],
+        [sg.Text(" ", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key=" ", enable_events=True)],
+        [sg.Text(" ", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.Combo((["Student", "Staff"]), size=(20, 1), key=" ", enable_events=True)],
+        [sg.Text(" ", size=(20, 1), text_color=colourText, background_color=colourBackground), sg.Combo((["No", "Yes"]), enable_events=True, key=" ", size=(20, 1), readonly=True)],
+        [sg.Col([[sg.Button("Submit and Exit", button_color=colourText, disabled=True)]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Exit", button_color=colourText)]], justification="center", background_color=colourBackground)],
+    ]
+
+    window = sg.Window("Add Car", layout, background_color=colourBackground, size=(500, 500), resizable=False)
+
+    while True:
+        event, values = window.read(timeout=1000) # Update window every second
+        if event == sg.WIN_CLOSED or event == "Exit": # Close the window if user clicks "x" icon
+            break
+        if event == "inputForename" or event == "inputSurname" or event == "type" or event == "disabled?": # Check to see if all fields have been populated
+            input1_value = values["inputForename"]
+            input2_value = values["inputSurname"]
+            input3_value = values["type"]
+            input4_value = values["disabled?"]
+            is_submit_disabled = not (input1_value and input2_value and input3_value and input4_value)
+            window["Submit and Exit"].update(disabled=is_submit_disabled) # Enable button once all fields are populated
+        if event == "Submit and Exit": # Print all data collected
+            forename = values["inputForename"]
+            surname = values["inputSurname"]
+            disabled = values["disabled?"]
+            if disabled == "No":
+                disabled = 0
+            else:
+                disabled = 1
+            studentOrStaff = values["type"]
+            print("-" * 30)
+            print("Forname: " + forename)
+            print("Surname: " + surname)
+            print("Type: " + studentOrStaff)
+            print("Disabled?: " + str(disabled))
+            print("-" * 30)
+            break # Breaks out of the loop and closes the window
+        current_time = datetime.now().strftime("%H:%M:%S") # Get current time to display
+        current_date = date.today()
+        window["time_display"].update(current_time)
+        window["date_display"].update(current_date)
+    window.close()
 
 def viewData():
     global colourBackground
