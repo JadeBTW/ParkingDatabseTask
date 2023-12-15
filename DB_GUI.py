@@ -136,10 +136,10 @@ def addCustomer():
         [sg.Text("Forename", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputForename", enable_events=True)],
         [sg.Text("Surname", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputSurname", enable_events=True)],
         [sg.Text("Student or Staff", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.Combo((["Student", "Staff"]), size=(20, 1), key="type", enable_events=True)],
-        [sg.Text("Disabled?", size=(20, 1), text_color=colourText, background_color=colourBackground), sg.Combo((["No", "Yes"]), enable_events=True, key="disabled?", size=(20, 1), readonly=True)],
+        [sg.Col([[sg.Check("Disabled?", size=(20, 1), text_color=colourText, background_color=colourBackground, enable_events=True, key="disabled?")]], justification="center", background_color=colourBackground)],
         [sg.Col([[sg.Button("Submit and Exit", button_color=colourText, disabled=True)]], justification="center", background_color=colourBackground)],
         [sg.Col([[sg.Button("Exit", button_color=colourText)]], justification="center", background_color=colourBackground)],
-    ]
+        ]
 
     window = sg.Window("Add Customer", layout, background_color=colourBackground, size=(500, 500), resizable=False)
 
