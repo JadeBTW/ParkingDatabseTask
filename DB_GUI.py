@@ -88,7 +88,7 @@ for line in open(f'{directory}spaces.txt', "r"):
     spaces.append(line)
 
 # Define layout
-def inputData():
+def inputDataMenu():
     global colourBackground
     global colourText
     global typeFont
@@ -96,7 +96,40 @@ def inputData():
     layout = [
         [sg.Text("", size=(20, 1), font=(typeFont, 10), key="date_display", justification="left", background_color=colourBackground, text_color=colourText)],
         [sg.Text("", size=(20, 1), font=(typeFont, 10), key="time_display", justification="left", background_color=colourBackground, text_color=colourText)],
-        [sg.Text(("Data Input Form"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
+        [sg.Text(("Data Input Menu"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
+        [sg.Col([[sg.Button("Add Customer", pad=(20, 10), button_color=colourText, key="addCustomer", size=(15, 3), font=(typeFont, 10)), sg.Button("Add Car", pad=(20, 10), button_color=colourText, key="addCar", size=(15, 3), font=(typeFont, 10))]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button(" ", pad=(20, 10), button_color=colourText, key=" ", size=(15, 3), font=(typeFont, 10)), sg.Button(" ", pad=(20, 10), button_color=colourText, key=" ", size=(15, 3), font=(typeFont, 10))]], justification="center", background_color=colourBackground)],
+        [sg.Col([[sg.Button("Exit", button_color=colourText, size=(15, 3))]], justification="center", background_color=colourBackground)],
+    ]
+
+    # Create the window
+    window = sg.Window("Parking Database Form", layout, background_color=colourBackground, size=(500, 500), resizable=False)
+
+    # Main loop
+    while True:
+        event, values = window.read(timeout=1000) # Update window every second
+        if event == sg.WIN_CLOSED or event == "Exit": # Close the window if user clicks "x" icon
+            break
+        if event == "addCustomer":
+            addCustomer()
+
+        current_time = datetime.now().strftime("%H:%M:%S") # Get current time to display
+        current_date = date.today()
+        window["time_display"].update(current_time)
+        window["date_display"].update(current_date)
+    window.close()
+
+
+def addCustomer():
+    global colourBackground
+    global colourText
+    global typeFont
+    global colourHighlight
+
+    layout = [
+        [sg.Text("", size=(20, 1), font=(typeFont, 10), key="date_display", justification="left", background_color=colourBackground, text_color=colourText)],
+        [sg.Text("", size=(20, 1), font=(typeFont, 10), key="time_display", justification="left", background_color=colourBackground, text_color=colourText)],
+        [sg.Text(("Add Customer"), size=(200, 1), font=(typeFont, 20), justification="c", text_color=colourText, background_color=colourBackground)],
         [sg.Text(("Please populate all fields and click submit and exit when done."), size=(200, 1), justification="c", background_color=colourBackground, text_color=colourText)],
         [sg.Text("Forename", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputForename", enable_events=True)],
         [sg.Text("Surname", size =(20, 1), text_color=colourText, background_color=colourBackground), sg.InputText((), size=(20, 1), key="inputSurname", enable_events=True)],
@@ -106,10 +139,8 @@ def inputData():
         [sg.Col([[sg.Button("Exit", button_color=colourText)]], justification="center", background_color=colourBackground)],
     ]
 
-    # Create the window
-    window = sg.Window("Parking Database Form", layout, background_color=colourBackground, size=(500, 500), resizable=False)
+    window = sg.Window("Add Customer", layout, background_color=colourBackground, size=(500, 500), resizable=False)
 
-    # Main loop
     while True:
         event, values = window.read(timeout=1000) # Update window every second
         if event == sg.WIN_CLOSED or event == "Exit": # Close the window if user clicks "x" icon
@@ -143,6 +174,9 @@ def inputData():
         window["date_display"].update(current_date)
     window.close()
 
+
+def addCar():
+    pass
 
 def viewData():
     global colourBackground
@@ -311,7 +345,7 @@ def main():
             print("[INFO] Database Closed")
             break
         if event == "addData":
-            inputData()
+            inputDataMenu()
         if event == "viewData":
             viewData()
         if event == "settings":
